@@ -16,11 +16,6 @@
     }
     h1 {
       color: #006f3c;
-      text-align: center;
-    }
-    p {
-      font-size: 16px;
-      margin-bottom: 20px;
     }
     ul {
       list-style: none;
@@ -49,19 +44,8 @@
       color: #555;
       margin-top: 30px;
     }
-    #confirmation {
-      display: none;
-      margin-top: 30px;
-    }
   </style>
   <script>
-    var deepLinkSelected = "";
-
-    function isIOSSafari() {
-      var ua = navigator.userAgent;
-      return /iP(ad|hone|od)/.test(ua) && /Safari/.test(ua) && !/CriOS/.test(ua) && !/FxiOS/.test(ua);
-    }
-
     function openApp(deepLink) {
       var ua = navigator.userAgent || navigator.vendor || window.opera;
       var isAndroid = /android/i.test(ua);
@@ -71,57 +55,28 @@
       var iosStore = "https://apps.apple.com/us/app/banca-m%C3%B3vil-banpro/id1548537395";
       var storeUrl = (isAndroid) ? androidStore : (isIOS ? iosStore : "");
 
-      if (isIOSSafari()) {
-        deepLinkSelected = deepLink;
-        document.getElementById("mainContent").style.display = "none";
-        document.getElementById("confirmation").style.display = "block";
-      } else {
-        window.location = deepLink;
-        setTimeout(function () {
-          window.location = storeUrl;
-        }, 2000);
-      }
-    }
+      window.location = deepLink;
 
-    function userConfirmed(hasApp) {
-      var ua = navigator.userAgent || navigator.vendor || window.opera;
-      var isAndroid = /android/i.test(ua);
-      var isIOS = /iPhone|iPad|iPod/i.test(ua);
-
-      var androidStore = "https://play.google.com/store/apps/details?id=com.banprogrupopromerica.ni.bancadigital.prod";
-      var iosStore = "https://apps.apple.com/us/app/banca-m%C3%B3vil-banpro/id1548537395";
-      var storeUrl = (isAndroid) ? androidStore : (isIOS ? iosStore : "");
-
-      if (hasApp) {
-        window.location = deepLinkSelected;
-      } else {
+      setTimeout(function () {
         window.location = storeUrl;
-      }
+      }, 1500);
     }
   </script>
 </head>
 <body>
-  <div id="mainContent">
-    <h1>Accesos Directos Banpro</h1>
-    <p>Selecciona la opción que deseas abrir en la app:</p>
-    <ul>
-      <li><button onclick="openApp('com.banprogrupopromerica.ni.bancadigital.uat://frmTransfersFromAccount')">Transferencias ACH</button></li>
-      <li><button onclick="openApp('com.banprogrupopromerica.ni.bancadigital.uat://frmBillPayStart')">Pago de Servicios</button></li>
-      <li><button onclick="openApp('com.banprogrupopromerica.ni.bancadigital.uat://frmBillPayCompanies')">Paquetes y Recargas</button></li>
-      <li><button onclick="openApp('com.banprogrupopromerica.ni.bancadigital.uat://frmCashWithdrawalTransactions')">Retiro Digital</button></li>
-      <li><button onclick="openApp('com.banprogrupopromerica.ni.bancadigital.uat://frmBillPayFromAccount?type=prestamo')">Pago de Préstamos</button></li>
-      <li><button onclick="openApp('com.banprogrupopromerica.ni.bancadigital.uat://frmBillPayFromAccount?type=tc')">Pago de Tarjeta de Crédito</button></li>
-      <li><button onclick="openApp('com.banprogrupopromerica.ni.bancadigital.uat://frmOffersMB')">Oferta de Tarjetas</button></li>
-    </ul>
-    <p class="note">
-      Nota: Si el usuario no ha iniciado sesión, será redirigido al login antes de continuar al destino.
-    </p>
-  </div>
-
-  <div id="confirmation">
-    <h2>¿Tienes Banpro App instalada?</h2>
-    <button onclick="userConfirmed(true)">✅ Sí, abrir la App</button>
-    <button onclick="userConfirmed(false)">❌ No, ir a la Tienda</button>
-  </div>
+  <h1>Accesos Directos Banpro</h1>
+  <p>Selecciona la opción que deseas abrir en la app:</p>
+  <ul>
+    <li><button onclick="openApp('com.banprogrupopromerica.ni.bancadigital.uat://frmTransfersFromAccount')">Transferencias ACH</button></li>
+    <li><button onclick="openApp('com.banprogrupopromerica.ni.bancadigital.uat://frmBillPayStart')">Pago de Servicios</button></li>
+    <li><button onclick="openApp('com.banprogrupopromerica.ni.bancadigital.uat://frmBillPayCompanies')">Paquetes y Recargas</button></li>
+    <li><button onclick="openApp('com.banprogrupopromerica.ni.bancadigital.uat://frmCashWithdrawalTransactions')">Retiro Digital</button></li>
+    <li><button onclick="openApp('com.banprogrupopromerica.ni.bancadigital.uat://frmBillPayFromAccount?type=prestamo')">Pago de Préstamos</button></li>
+    <li><button onclick="openApp('com.banprogrupopromerica.ni.bancadigital.uat://frmBillPayFromAccount?type=tc')">Pago de Tarjeta de Crédito</button></li>
+    <li><button onclick="openApp('com.banprogrupopromerica.ni.bancadigital.uat://frmOffersMB')">Oferta de Tarjetas</button></li>
+  </ul>
+  <p class="note">
+    Nota: Si el usuario no ha iniciado sesión, será redirigido al login antes de continuar al destino.
+  </p>
 </body>
 </html>
